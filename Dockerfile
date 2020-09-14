@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 ARG CMAKE_VERSION=3.18.2
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get -qq update -y \
     && apt-get -qq install -y --no-install-recommends \
         build-essential \
@@ -12,9 +14,14 @@ RUN apt-get -qq update -y \
         xz-utils \
         curl \
         git \
+        cppcheck \
+        valgrind \
+        dialog \
     && apt-get clean -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+
+ENV DEBIAN_FRONTEND=dialog
 
 RUN curl -SL http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz | tar -xJC . \
     && mv clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_9.0.0
@@ -36,3 +43,4 @@ RUN git clone https://gn.googlesource.com/gn    \
     && ninja -C out
 
 ENV PATH=/gn/out:${PATH}
+
