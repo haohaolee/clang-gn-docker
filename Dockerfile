@@ -24,7 +24,8 @@ RUN apt-get -qq update -y \
 ENV DEBIAN_FRONTEND=dialog
 
 RUN curl -SL http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz | tar -xJC . \
-    && mv clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_9.0.0
+    && mv clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_9.0.0 \
+    && find clang_9.0.0 -type f -executable -exec strip '{}' \;
 
 RUN curl -SL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.sh -o /tmp/curl-install.sh \
     && chmod u+x /tmp/curl-install.sh \
