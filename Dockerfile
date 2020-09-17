@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get -qq update -y \
     && apt-get -qq install -y --no-install-recommends \
         build-essential \
+        openjdk-11-jdk-headless \
         ca-certificates \
         python \
         ninja-build \
