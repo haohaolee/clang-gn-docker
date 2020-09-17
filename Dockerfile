@@ -10,6 +10,8 @@ RUN apt-get -qq update -y \
         openjdk-11-jdk-headless \
         ca-certificates \
         python \
+        libpython2.7 \
+        gdb \
         ninja-build \
         ccache \
         xz-utils \
